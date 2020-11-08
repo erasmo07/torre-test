@@ -1,30 +1,47 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from 'react-router-dom';
 import { Table } from "react-bootstrap";
 
 
 const Search = ({result}) => {
-  if (!result) return null;
 
   return (
     <Table responsive>
       <thead>
         <tr>
-          <th>#</th>
-          {Array.from({ length: 12 }).map((_, index) => (
-            <th key={index}>Table heading</th>
-          ))}
+          <td>Nombre</td>
+          <td>Posición</td>
+          <td>Ubicación</td>
+          <td>Habilidades</td>
+          <td>Abierto a</td>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>1</td>
-          {Array.from({ length: 12 }).map((_, index) => (
-            <td key={index}>
-              <Link to={`/user/${index}`}>User {index}</Link>
-            </td>
-          ))}
-        </tr>
+          {result.map(item => {
+            return (
+              <tr>
+                <td>
+                  <Link to={`/user/${item.username}`}>{item.name}</Link>
+                </td>
+                <td>{item.professionalHeadline}</td>
+                <td>{item.locationName}</td>
+                <td>
+                  <ul>
+                    {item.skills.map(skill => (
+                      <li>{skill.name}</li>
+                    ))}
+                  </ul>
+                </td>
+                <td>
+                  <ul>
+                    {item.openTo.map(name => (
+                      <li>{name}</li>
+                    ))}
+                  </ul>
+                </td>
+              </tr>
+            )
+          })}
       </tbody>
     </Table>
   );

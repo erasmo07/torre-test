@@ -6,6 +6,7 @@ import Job from "./Pages/Job";
 import User from "./Pages/User";
 import NavBar from "./Layout/NavBar";
 import { Container } from "react-bootstrap";
+import { useState } from "react";
 
 /*
   Pages:
@@ -18,14 +19,19 @@ import { Container } from "react-bootstrap";
 */
 
 function App() {
+
+  const [search, setSearch] = useState([]);
+
   return (
     <Router>
-      <NavBar />
+      <NavBar setSearch={setSearch}/>
       <Switch>
         <Container>
-          <Route path="/" exact component={Home} />
+          <Route path="/" exact>
+            <Home search={search} />
+          </Route>
           <Route path='/job' exact component={Job} />
-          <Route path='/user/:id' component={User} />
+          <Route path='/user/:username' component={User} />
         </Container>
       </Switch>
     </Router>
