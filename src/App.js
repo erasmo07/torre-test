@@ -1,6 +1,11 @@
-import logo from './logo.svg';
-import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Home from "./Pages/Home";
+import Job from "./Pages/Job";
+import User from "./Pages/User";
+import NavBar from "./Layout/NavBar";
+import { Container } from "react-bootstrap";
 
 /*
   Pages:
@@ -14,7 +19,16 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (
-    <h1> Home </h1> 
+    <Router>
+      <NavBar />
+      <Switch>
+        <Container>
+          <Route path="/" exact component={Home} />
+          <Route path='/job' exact component={Job} />
+          <Route path='/user/:id' component={User} />
+        </Container>
+      </Switch>
+    </Router>
   );
 }
 
